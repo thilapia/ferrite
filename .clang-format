@@ -1,0 +1,32 @@
+BasedOnStyle: LLVM
+IndentWidth: 2
+ContinuationIndentWidth: 2
+UseTab: Never
+ColumnLimit: 80
+BreakBeforeBraces: Attach
+BreakAfterAttributes: Always
+BreakAfterReturnType: All
+AlignAfterOpenBracket: false
+BreakFunctionDefinitionParameters: true
+BreakFunctionDeclarationParameters: true
+BreakBeforeCloseBracketFunction: true
+PackParameters:
+  BinPack: AlwaysOnePerLine
+InsertBraces: true
+RemoveBracesLLVM: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+DerivePointerAlignment: false
+PointerAlignment: Left
+AlignConsecutiveDeclarations: None
+AlignConsecutiveBitFields: None
+AllowShortEnumsOnASingleLine: false
+EnumTrailingComma: Insert
+IndentCaseLabels: true
+IndentCaseBlocks: false
+BracedInitializerIndentWidth: 2
+BinPackLongBracedList: false
+BreakAfterOpenBracketBracedList: true
+BreakBeforeCloseBracketBracedList: true

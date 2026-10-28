@@ -44,3 +44,18 @@ image-info:
 # Remove build outputs through Ninja; preserve firmware settings.
 clean:
     meson compile -C "{{build_dir}}" --clean
+
+# Format project-owned C sources and headers, including new files.
+format:
+    find kernel -type f \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 -r clang-format --style=file -i
+
+# Check formatting without modifying files.
+format-check:
+    find kernel -type f \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 -r clang-format --style=file --dry-run --Werror
+
+# Check project translation units and their included project headers.
+tidy: setup
+    run-clang-tidy -quiet -p "{{build_dir}}" '(^|/)kernel/.*\.c$'
+
+# Run all local formatting and static-analysis checks.
+check: format-check tidy

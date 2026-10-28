@@ -6,6 +6,7 @@ project(
     default_options : [
         'c_std=c23',
         'warning_level=3',
+        'werror=true',
         'buildtype=debug',
     ],
 )
