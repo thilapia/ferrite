@@ -1,5 +1,5 @@
 kernel_sources = files(
-    'src/main.c'
+    'src/main.c',
 )
 
 kernel_includes = [
