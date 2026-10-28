@@ -1,0 +1,6 @@
+timeout: 15
+serial: no
+
+/Ferrite
+    protocol: limine
+    path: boot():/boot/kernel.elf
