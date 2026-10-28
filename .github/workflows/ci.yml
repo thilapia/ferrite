@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks-and-build:
+    name: Checks and build (x86_64)
+    runs-on: ubuntu-24.04
+    # Match the project's recent LLVM and Meson requirements.
+    container: archlinux:base
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Install build dependencies
+        run: |
+          pacman -Syu --noconfirm --needed \
+            git clang llvm lld meson ninja just uv python \
+            gptfdisk dosfstools mtools qemu-img
+
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Check formatting and static analysis
+        run: just check
+
+      - name: Build kernel and disk image
+        run: just build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: ferrite-x86_64-${{ github.sha }}
+          path: |
+            out/kernel/kernel.elf
+            out/ferrite.qcow2
+          if-no-files-found: error
+          retention-days: 14
