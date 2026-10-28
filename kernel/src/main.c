@@ -3,17 +3,13 @@
 
 #include <limine/limine.h>
 
-[[noreturn]]
-static void
-halt() {
+[[noreturn]] static void halt() {
   for (;;) {
     __asm__ volatile("cli; hlt" ::: "memory");
   }
 }
 
-[[noreturn]]
-void
-kmain() {
+[[noreturn]] void kmain() {
   if (!LIMINE_BASE_REVISION_SUPPORTED(g_limine_base_revision)) {
     halt();
   }

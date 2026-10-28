@@ -4,8 +4,8 @@ ContinuationIndentWidth: 2
 UseTab: Never
 ColumnLimit: 80
 BreakBeforeBraces: Attach
-BreakAfterAttributes: Always
-BreakAfterReturnType: All
+BreakAfterAttributes: Never
+BreakAfterReturnType: None
 AlignAfterOpenBracket: false
 BreakFunctionDefinitionParameters: true
 BreakFunctionDeclarationParameters: true
